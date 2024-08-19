@@ -65,12 +65,11 @@ The app will be available at `http://127.0.0.1:5000/` in your web browser.
 ## Project Structure
 
 humor_style_classifier_app/
-├── app.py                     # The main Flask application file
-├── templates/
-│   └── index.html             # HTML template for the homepage
-├── ali_xgboost_humour_model.pkl # Pre-trained XGBoost model
-├── requirements.txt           # Lists all the dependencies needed to run the project
-└── README.md                  # This README file
+- app.py                           # The main Flask application file
+- templates/index.html             # HTML template for the homepage
+- ali_xgboost_humour_model.pkl   # Pre-trained XGBoost model
+- requirements.txt               # Lists all the dependencies needed to run the project
+- README.md                      # This README file
 
 
 ## Technologies Used
