@@ -30,7 +30,7 @@ Make sure you have the following installed:
 
    ```bash
    git clone https://github.com/MaryKenneth/humor_style_classifier_app.git
-   cd joke-classification
+   cd humor_style_classifier_app
    ```
 
 2. **Install the Required Packages**
