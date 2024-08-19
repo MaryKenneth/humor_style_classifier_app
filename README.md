@@ -29,8 +29,8 @@ Make sure you have the following installed:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/joke-classification.git
-   cd joke-classification
+   git clone https://github.com/MaryKenneth/humor_style_classifier_app.git
+   cd humor_style_classifier_app
    ```
 
 2. **Install the Required Packages**
