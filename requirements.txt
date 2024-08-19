@@ -1,0 +1,4 @@
+Flask==2.3.2
+numpy==1.25.0
+sentence-transformers==2.2.2
+gunicorn

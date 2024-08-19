@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Humour Styles Webpage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Welcome to Humor Style Classification Tool!</h1>
+        <p class="mt-4"><b>Humor Styles</b></p>
+        <p class="mt-4">Humor styles refer to the different ways individuals utilize humor in their interactions and coping mechanisms, and they
+             are a focus of research in personality psychology. These styles can significantly influence social relationships, emotional 
+             well-being, and coping strategies. There are four main humor styles <a href="https://psycnet.apa.org/record/2003-01859-007">(Martin et al., 2003)</a>: </p>
+        <ul>
+            <li><b>Affiliative humor: </b>Using humor to enhance relationships and reduce tension. It's generally positive and brings people together.</li>
+            <li><b>Self-enhancing humor: </b>Using humor to cope with stress and maintain a positive outlook on life. It's an optimistic style of humor.</li>
+            <li><b>Aggressive humor: </b>Using humor to criticize or manipulate others. This includes sarcasm, teasing, and ridicule.</li>
+            <li><b>Self-defeating humor: </b>Making fun of oneself to gain approval from others. It involves putting oneself down to amuse others.</li>
+        </ul>
+
+        <p><b>Implications of Humor Styles: </b>The use of humor can have both positive and negative effects on mental and physical health. Affiliative and self-enhancing humor are 
+            generally associated with better psychological well-being, while aggressive and self-defeating humor can lead to detrimental 
+            outcomes in relationships and self-esteem .</p>
+
+        <p><b style="color: brown;">Now Lets see what your humor style is!</b></p>
+        <form id="joke-form">
+            <div class="mb-3">
+                <label for="joke" class="form-label"><b>Enter your Joke here:</b></label>
+                <input type="text" class="form-control" id="joke" name="joke" required>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+        <div id="result" class="mt-4"></div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#joke-form').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/classify_joke',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ joke: $('#joke').val() }),
+                    success: function(response) {
+                        $('#result').html(
+                            '<h4>Prediction:</h4>' +
+                            '<p><b style="color: green;">Humor Style: </b>' + response['style'] + 
+                                '-- <i style="color: red;">[' + response['probability'] +  ']</i></p>' +
+                            '<p><b style="color: blue;">Explanation: </b>' + response['explain'] + '</p>' +
+                            '<p><b style="color: brown;">Encouragement: </b>' + response['encourage'] + '</p>'
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
