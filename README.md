@@ -29,7 +29,7 @@ Make sure you have the following installed:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/joke-classification.git
+   git clone https://github.com/MaryKenneth/humor_style_classifier_app.git
    cd joke-classification
    ```
 
