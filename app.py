@@ -2,16 +2,23 @@
 from flask import Flask, render_template, request, jsonify
 import pickle
 import numpy as np
-
+import xgboost as xgb
+from xgboost import XGBClassifier
 from sentence_transformers import SentenceTransformer
 
 
 # instance of flask application 
 app = Flask(__name__)
 
+# Load the trained model from a.pkl file
+model_filename = 'mul_xgboost_humour_model.json'
+model_data = XGBClassifier()
+#model_data = xgb.Booster()
+model_data.load_model(model_filename)
+
 # Load the model
-with open('ali_xgboost_humour_model.pkl', 'rb') as file:
-    model_data = pickle.load(file)
+#with open('ali_xgboost_humour_model.pkl', 'rb') as file:
+#    model_data = pickle.load(file)
 
 # Define label mappings
 label_map = {
@@ -41,15 +48,15 @@ encouragement_map = {
 }
 
 # Load the embedding model once globally
-embedding_model = SentenceTransformer('Alibaba-NLP/gte-large-en-v1.5', trust_remote_code=True)
+model = SentenceTransformer('intfloat/multilingual-e5-large-instruct')  # 17th Multilingual-E5-large-instruct
 
-def ALI(sentences):
-    dataset_embedding = embedding_model.encode(sentences, normalize_embeddings=True)
+def MUL(sentences):
+    dataset_embedding = model.encode(sentences, normalize_embeddings=True)
     return dataset_embedding
 
 def single_predict(example):
     # Embedding 
-    embedding = ALI(example)
+    embedding = MUL(example)
     embedding = np.expand_dims(embedding, axis=0)
 
     # Predict probabilities using the model
